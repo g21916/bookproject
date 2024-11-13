@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+    
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>{%block title %}{% endblock title %}| 書籍一覧</title>
+  </head>
+  <body>
+    <style>
+        body {
+            background: linear-gradient(
+        to right, 
+        #f3efa1,  /* 淡いクリーム色 */
+        #eedd99   /* 小麦色 */
+      );
+        }
+      </style>
+    {% block header %} {% endblock %}
+    <div class="breadcrumb">
+        <ul class="breadcrumbs">
+          <li><a href="{% url 'index' %}">ホーム</a></li>
+    {% block breadcrumb %}{% endblock %}
+        </ul>
+      </div>
+    <div class ='p-4'>
+        <h1>{% block h1 %}{% endblock %}</h1>
+        {% block content %}{% endblock content %}
+    </div>
+    <!-- Bootstrap JavaScript and dependencies (like Popper.js) -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-O4F02F5wCgtjqW3z9/1G5/F5FX4LF1n2jR0nHrU2T+DYxFf9M42+V9GynH1/QH86" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGPp2jQu7z3Hfrt6B1f8hX/Su8w8jF5g7X9" crossorigin="anonymous"></script>
+    
+    <!-- ツールチップの初期化 -->
+    <script>
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        });
+    </script>
+  </body>
+  <style>
+    h1{
+        text-align: center;
+    }
+      .breadcrumb-list {
+        display: flex;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        align-items: stretch; /* 各li要素を高さ揃え */
+    }
+    .breadcrumb a {
+        text-decoration: none;
+        height: 100%; /* リンクの高さをliと同じにする */
+        display: flex;
+        align-items: center; /* リンクのテキストを上下に中央揃え */
+        justify-content: center;
+        color: #3d76f0;
+        padding: 0 3px; /* リンクの左右の余白 */
+    }
+    .breadcrumb li {
+    display: inline-block;
+    position: relative;
+    padding-right: calc(16px + 8px);
+    margin-right: 8px;
+    color: #7986CB;
+    }
+     .breadcrumb li::before {
+        content: '›';
+        width: 1em;
+        height: 1em;
+        line-height: 1em; /* 高さ調整 */
+        text-align: center;
+        font-size: 1.5em; /* 矢印のサイズ */
+        color: inherit;
+        position: absolute;
+        top: 50%;
+        right: 0;
+        transform: translateY(-50%);
+        right: -5px; /* 矢印を適切な位置に調整 */
+    }
+    .box{
+        max-width: 800px;
+            margin: 0 auto;
+            padding: 1em 1.5em;
+            color: #232323;
+            background: #fff8e8;
+            border-left: solid 10px #ffc06e;
+    }
+    .box p {
+            
+            font-size: 1.3em;
+            margin: 0; 
+            padding: 0;
+        }
+</style>
+
+</html>

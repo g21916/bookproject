@@ -1,0 +1,77 @@
+{% extends 'base.html'%}
+
+<!-- タイトルブロックの上書き -->
+{% block title %}
+読書ステップ
+{% endblock %}
+
+
+{% block content %}
+<div class="progress-bar-container">
+    <p class="bar-text">進捗度0%</p>
+    <div class="progress-bar" id="progress-bar"></div>
+</div>
+<div class="titlebox" style="text-align: center;   margin-top: -40px;">
+<h1 class ="title" style="text-align: center; margin:2rem 0rem 2rem 0rem; max-width: 500px;">
+    読書ステップ
+</h1>
+</div>
+<div style="display: flex; justify-content: center;">
+    <div class ="p-4 m-4 bg-light rounded" style="border: 4px solid orange; max-width: 800px;">
+        <p>これからあなたは、あなたにぴったりの書籍をおすすめするためにいくつか質問に答えてもらいます。</p>
+        <p>当てはまるボタンをクリックして答えてください。</p>
+        <p>まず、興味のある分野は何ですか？</p>
+        <p>次の、本のジャンルの説明を読んで読みたいジャンルを選択してもらいます！</p>
+    </div>
+</div>
+<div class="row">
+    <div class="col text-center" style="margin-top: 20px;">
+      <a href="{% url 'genre' %}" class="btn" style="background-color: #ff873d; color: rgb(247, 242, 242); font-size: 24px; padding: 15px 30px;  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.29);">進める</a>
+    </div>
+  </div>
+<style>
+    .title {
+        display: inline-block;
+        position: relative;
+        padding: 1rem 2rem calc(1rem + 10px);
+        background: #ffcd03;
+}
+
+.title:before {
+  position: absolute;
+  top: -7px;
+  left: -7px;
+  width: 100%;
+  height: 100%;
+  content: '';
+  border: 4px solid #000;
+}
+.bar-text{
+    position: absolute; /* 親要素内で絶対位置に設定 */
+    top: -20px; /* バーの上に配置するために上方向へ移動 */
+}
+.progress-bar-container {
+    position: relative; /* 内部要素を絶対位置で配置できるように */
+    margin: 0 0 0 auto;
+      width: 20%;
+      background-color: #e0e0e0;
+      height: 10px;
+    }
+  
+    .progress-bar {
+      height: 100%;
+      background-color: #76c7c0;
+      width: 0%; /* 固定幅 */
+    }
+</style>
+<script>
+    // プログレスバーの幅を固定で50%に設定
+    const progressBar = document.getElementById('progress-bar');
+    progressBar.style.width = '0%';
+</script>
+{% endblock %}
+
+
+{% block header%}{% endblock %}<!-- ヘッダー非表示 -->
+
+

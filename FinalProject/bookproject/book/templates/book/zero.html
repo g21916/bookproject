@@ -1,0 +1,30 @@
+{% extends 'base.html'%}
+
+<!-- タイトルブロックの上書き -->
+{% block title %}
+0件
+{% endblock %}
+
+
+{% block content %}
+<h1 class ="title" style="text-align: center; margin:2rem 0rem 2rem 0rem;">
+    0件
+</h1>
+<div class ="p-4 m-4 bg-light rounded" style="border: 4px solid orange;">
+    <p>申し訳ありません、検索結果が0件でした</p>
+    <p>検索をやり直しますか？</p>
+</div>
+<div class="row">
+    <div class="col text-center" style="margin-top: 20px;">
+      <a href="{% url 'genre' %}" class="btn btn-primary">やり直す</a>
+    </div>
+  </div>
+  
+{% endblock %}
+
+
+{% block header%}{% endblock %}<!-- ヘッダー非表示 -->
+
+
+
+

@@ -1,0 +1,131 @@
+{% extends 'base.html' %}
+
+<!-- タイトルブロックの上書き -->
+<h2>{% block title %}
+ジャンル説明
+{% endblock %}</h2>
+{% block breadcrumb %}  
+{{ block.super }}
+<li style="text-align: center; margin: 0 0;">ジャンル選択</li>
+{% endblock %}
+
+{% block content %}
+<h1 class ="title" style="margin-top: -60px;">
+    ジャンル説明
+</h1>
+<div class="progress-bar-container">
+    <p class="bar-text">進捗度20%</p>
+    <div class="progress-bar" id="progress-bar"></div>
+</div>
+<div class="p-4 m-4 bg-light rounded" style="border: 4px solid orange;">
+    <div style="text-align: left;">
+        <div class="btn-group-vertical">
+            <div class="position-relative">
+                <a href="{% url 'search_books_genre' %}?genre=恋愛" class="btn custom-btn btn-sm mb-2" style="display: block; width: 150px;">恋愛</a>
+                <div class="tooltip-text">恋愛がテーマの本</div>
+            </div>
+            <div class="position-relative">
+                <a href="{% url 'search_books_genre' %}?genre=青春" class="btn custom-btn btn-sm mb-2" style="display: block; width: 150px;">青春</a>
+                <div class="tooltip-text">主人公が学生・若者で、思春期の悩み、人間関係、成長、夢がテーマ</div>
+            </div>
+            <div class="position-relative">
+                <a href="{% url 'search_books_genre' %}?genre=SF" class="btn custom-btn btn-sm mb-2" style="display: block; width: 150px;">SF</a>
+                <div class="tooltip-text">科学的論理を使った未来や社会の物語</div>
+            </div>
+            <div class="position-relative">
+                <a href="{% url 'search_books_genre' %}?genre=ファンタジー" class="btn custom-btn btn-sm mb-2" style="display: block; width: 150px;">ファンタジー</a>
+                <div class="tooltip-text">魔法など非現実的な超常現象が起こる物語</div>
+            </div>
+            <div class="position-relative">
+                <a href="{% url 'search_books_genre' %}?genre=ミステリー" class="btn custom-btn btn-sm mb-2" style="display: block; width: 150px;">ミステリー</a>
+                <div class="tooltip-text">事件の解決や真相を探す物語</div>
+            </div>
+            <div class="position-relative">
+                <a href="{% url 'search_books_genre' %}?genre=サスペンス" class="btn custom-btn btn-sm mb-2" style="display: block; width: 150px;">サスペンス</a>
+                <div class="tooltip-text">主人公が事件や危険に巻き込まれる</div>
+            </div>
+            <div class="position-relative">
+                <a href="{% url 'search_books_genre' %}?genre=ホラー" class="btn custom-btn btn-sm mb-2" style="display: block; width: 150px;">ホラー</a>
+                <div class="tooltip-text">読者を怖がらせるためのストーリー</div>
+            </div>
+            <div class="position-relative">
+                <a href="{% url 'search_books_genre' %}?genre=政治ドラマ" class="btn custom-btn btn-sm mb-2" style="display: block; width: 150px;">政治ドラマ</a>
+                <div class="tooltip-text">国家の権力争いや国の統治のストーリー</div>
+            </div>
+            <div class="position-relative">
+                <a href="{% url 'search_books_genre' %}?genre=歴史・時代" class="btn custom-btn btn-sm mb-2" style="display: block; width: 150px;">歴史・時代</a>
+                <div class="tooltip-text">歴史上の人物・史実をもとにしている。昔の時代背景の物語</div>
+            </div>
+            <div class="position-relative">
+                <a href="{% url 'search_books_genre' %}?genre=ヒューマンドラマ" class="btn custom-btn btn-sm mb-2" style="display: block; width: 150px;">ヒューマンドラマ</a>
+                <div class="tooltip-text">人間関係や日常の出来事をもとにしたストーリー</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* ボタンのカスタムスタイル */
+    .custom-btn {
+        background-color: #ff5733; /* 例: 赤色 */
+        color: white; /* テキストの色 */
+        height: 50px; /* ボタンの高さを指定 */
+        line-height: 50px; /* ボタン内のテキストを中央揃え */
+        box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.29);
+    }
+
+    .custom-btn:hover {
+        background-color: #f77f0e; /* オレンジに変化 */
+        color: white; /* ホバー時のテキストの色 */
+    }
+    
+    /* 初期状態では透明のツールチップ */
+    .tooltip-text {
+        display: block; /* 常に表示する */
+        position: absolute;
+        left: 160px; /* ボタンの右側に表示されるように調整 */
+        top: 0; /* ボタンの高さに合わせて調整 */
+        width: 550px; /* ツールチップの幅を調整 */
+        background-color: transparent; /* 背景透明 */
+        color: rgb(17, 15, 15); /* 文字色 */
+        padding: 10px; /* パディングを追加 */
+        border-radius: 5px;
+        z-index: 1000;
+        white-space: nowrap; /* 折り返しを禁止 */
+        height: 50px; /* ボタンと同じ高さにする */
+        line-height: 30px; /* ツールチップ内のテキストを中央揃え */
+        opacity: 1; /* 常に不透明 */
+        transition: background-color 0.3s ease; /* 背景色の遷移を滑らかに */
+    }
+
+    /* ボタンホバー時にツールチップの背景をオレンジに変化 */
+    .position-relative:hover .tooltip-text {
+        background-color: rgba(247, 127, 14, 0.8); /* オレンジ色の背景 */
+    }
+    .bar-text{
+    position: absolute; /* 親要素内で絶対位置に設定 */
+    top: -20px; /* バーの上に配置するために上方向へ移動 */
+    }
+.progress-bar-container {
+    position: relative; /* 内部要素を絶対位置で配置できるように */
+    margin: 0 0 0 auto;
+      width: 20%;
+      background-color: #e0e0e0;
+      height: 10px;
+    }
+  
+    .progress-bar {
+      height: 100%;
+      background-color: #76c7c0;
+      width: 20%; /* 固定幅 */
+    }
+
+</style>
+
+{% endblock %}
+
+{% block header %}{% endblock %} <!-- ヘッダー非表示 -->
+
+<!-- Bootstrap JavaScriptと依存関係（Popper.jsなど）を残しておく -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-O4F02F5wCgtjqW3z9/1G5/F5FX4LF1n2jR0nHrU2T+DYxFf9M42+V9GynH1/QH86" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGPp2jQu7z3Hfrt6B1f8hX/Su8w8jF5g7X9" crossorigin="anonymous"></script>

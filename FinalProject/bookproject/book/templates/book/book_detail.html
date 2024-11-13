@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}{{object.title}}{% endblock %}
+{% block h1 %}<h1 style="margin-top: -50px;">書籍詳細</h1>{% endblock %}
+
+{% block content %}
+<div class="progress-bar-container">
+    <p class="bar-text">進捗度100%!</p>
+    <div class="progress-bar" id="progress-bar"></div>
+</div>
+    <div class="box" style="margin-top: 30px;">
+        <p>最終検索結果が出ました！ あなたにおすすめの本はこれです！</p>
+    </div>
+    <div class="p-4 m-4 bg-light rounded d-flex" style="border: 4px solid orange; align-items: flex-start;">
+        <!-- サムネイル画像を表示 -->
+        {% if object.thumbnail %}
+        <img src="{{ object.thumbnail.url }}" alt="Book Thumbnail" class="img-thumbnail" style="width: 300px; height: 350px; object-fit: cover; margin-right: 20px;">
+        {% else %}
+        <img src="{% static 'path/to/default_image.jpg' %}" alt="Default Thumbnail" class="img-thumbnail" style="width: 200px; height: 250px; object-fit: cover; margin-right: 20px;">
+        {% endif %}
+
+        <!-- 書籍詳細情報 -->
+        <div>
+            <h2 class="text" style="color: rgb(14, 11, 4);">{{ object.title }}</h2>
+            <p>著者: {{ object.author }}</p>
+            <p>出版社: {{ object.publisher }}</p>
+            <p>ISBN: {{ object.isbn }}</p>
+            <p>発売日: {{ object.release_date }}</p>
+            <p>ページ数: {{ object.page }}</p>
+            <p>{{ object.summary }}</p>
+            <p>URLはこちら: <a href="{{ object.url }}">Amazonリンク</a></p>
+            <p>
+               <a href="{% url 'list-book' %}" class="btn btn-pp">一覧へ</a>
+            </p>
+        </div>
+    </div>
+    <style>
+        .btn-pp{
+            background-color: orange;
+            color: black;
+            box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.29);
+        }
+        .bar-text{
+    position: absolute; /* 親要素内で絶対位置に設定 */
+    top: -20px; /* バーの上に配置するために上方向へ移動 */
+    color:red
+    }
+.progress-bar-container {
+    position: relative; /* 内部要素を絶対位置で配置できるように */
+    margin: 0 0 0 auto;
+      width: 20%;
+      background-color: #e0e0e0;
+      height: 10px;
+    }
+  
+    .progress-bar {
+      height: 100%;
+      background-color: #76c7c0;
+      width: 100%; /* 固定幅 */
+    }
+    </style>
+{% endblock content %}
