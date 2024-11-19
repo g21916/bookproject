@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}書籍一覧リスト{% endblock %}
+{% block h1 %}<h1 style="margin-top: -50px;">書籍一覧リスト</h1>{% endblock %}
+
+{% block content %}
+<div class="progress-bar-container">
+    <p class="bar-text">進捗度80%</p>
+    <div class="progress-bar" id="progress-bar"></div>
+</div>
+    <div class="box" style="margin-top: 30px;">
+        <p>最終結果まで後一歩です！ </p>
+        <p>説明文と表示画像から読みたい本を一つ決めてください。</p>
+    </div>
+    {% for item in object_list %}
+    <div class="p-4 m-4 bg-light rounded d-flex" style="border: 4px solid orange; align-items: flex-start;">
+        <!-- サムネイル画像を表示 -->
+        {% if item.thumbnail %}
+        <img src="{{ item.thumbnail.url }}" alt="Book Thumbnail" class="img-thumbnail" style="width: 200px; height: 250px; object-fit: cover; margin-right: 20px;">
+        {% else %}
+        <img src="{% static 'path/to/default_image.jpg' %}" alt="Default Thumbnail" class="img-thumbnail" style="width: 200px; height: 250px; object-fit: cover; margin-right: 20px;">
+        {% endif %}
+
+        <!-- 書籍情報 -->
+        <div>
+            <h2 class="text" style="color: rgb(226, 148, 2);">{{ item.title }}</h2>
+            <div class="mt-3">
+                <p class="card-text">{{ item.summary }}</p>
+                <a href="{% url 'detail-book' item.pk %}" class="btn btn-p">詳細へ</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    <div  style="text-align: center;">
+        <button onclick="window.history.back()" class="btn btn-secondary">一つ前に戻る</button>
+    </div>
+    <style>
+        .btn-secondary{
+            box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.29);
+            background-color: rgb(0, 149, 255);
+            color:white
+        }
+        .btn-secondary:hover {
+            background-color: rgb(0, 149, 255); /* hover時も色を変えない */
+            color: white;
+        }
+        .btn-p{
+            box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.29);
+            background-color:  #ff5733;
+            color:white
+        }
+        .btn-p:hover {
+            background-color: #ff5733; /* hover時も色を変えない */
+            color: white;
+        }
+        .bar-text{
+    position: absolute; /* 親要素内で絶対位置に設定 */
+    top: -20px; /* バーの上に配置するために上方向へ移動 */
+    }
+    .progress-bar-container {
+    position: relative; /* 内部要素を絶対位置で配置できるように */
+    margin: 0 0 0 auto;
+      width: 20%;
+      background-color: #e0e0e0;
+      height: 10px;
+    }
+  
+    .progress-bar {
+      height: 100%;
+      background-color: #76c7c0;
+      width: 80%; /* 固定幅 */
+    }
+       
+    </style>
+{% endblock content %}

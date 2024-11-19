@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+{% load filters %}
+
+{% block title %}ページ数選択{% endblock %}
+{% block breadcrumb %}  
+{{ block.super }}
+<li><a href="{% url 'genre' %}">ジャンル選択</a></li>
+<li><a href="javascript:window.history.back()" class="btn btnback">短編集か長編を選択</a></li>
+<li>ページ数で絞り込む</li>
+{% endblock %}
+{% block content %}
+<div class="progress-bar-container">
+    <p class="bar-text">進捗度60%</p>
+    <div class="progress-bar" id="progress-bar"></div>
+</div>
+    <div class="box">
+        <p style="font-size: 2.5em;">ページ数で絞り込む</p>
+        <p>読みたいページ数を選んでください。</p>
+    </div>
+<!-- ページリロード用のJavaScript -->
+<script>
+    window.addEventListener('pageshow', function(event) {
+        if (event.persisted || (window.performance && window.performance.navigation.type === 2)) {
+            window.location.reload();
+        }
+    });
+</script>
+
+{% if page_ranges %}
+<div class="page-ranges" style="display: flex; flex-direction: column; align-items: center;">
+    {% for range_key, page_list in page_ranges.items %}
+        {% with range_parts=range_key|split:' - ' %}
+            <form method="GET" action="{% url 'filter_by_page_range' range_parts.0 range_parts.1 %}" style="margin: 10px;">
+                <button type="submit" class="custom-button"  style="padding: 10px 20px; font-size: 16px;">{{ range_key }} ページ</button>
+            </form>
+        {% endwith %}
+    {% endfor %}
+</div>
+{% else %}
+<p style="text-align: center;">該当するページ数の本が見つかりませんでした。</p>
+{% endif %}
+
+<!--<h3 style="text-align: center;">フィルタされた書籍</h3>
+
+{% if object_list %}
+    <ul style="list-style: none; padding: 0; text-align: center;">
+    {% for book in object_list %}
+        <li>{{ book.title }} - ページ数: {{ book.page }}</li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p style="text-align: center;">該当する書籍はありません。</p>
+{% endif %}-->
+
+<style>
+    .custom-button{
+        display: inline-block;
+        padding: 0.5em 1em;
+        text-decoration: none;
+        background: #f7f7f7;
+        border-left: solid 6px #ff7c5c;;/*左線*/
+        color: #ee7355;;/*文字色*/
+        font-weight: bold;
+        box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.29);
+    }
+    p{
+        text-align: center;
+    }
+    h2{
+        text-align: center;
+        margin-top: -50px;
+    }
+    .custom-button{
+        display: inline-block;
+        padding: 0.5em 1em;
+        text-decoration: none;
+        background: #f7f7f7;
+        border-left: solid 6px #ff7c5c;;/*左線*/
+        color: #ee7355;;/*文字色*/
+        font-weight: bold;
+        box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.29);
+    }
+    .bar-text{
+    position: absolute; /* 親要素内で絶対位置に設定 */
+    top: -25px; /* バーの上に配置するために上方向へ移動 */
+    }
+.progress-bar-container {
+    position: relative; /* 内部要素を絶対位置で配置できるように */
+    margin: -20px -20px 10px auto;
+      width: 20%;
+      background-color: #e0e0e0;
+      height: 10px;
+    }
+  
+    .progress-bar {
+      height: 100%;
+      background-color: #76c7c0;
+      width: 60%; /* 固定幅 */
+    }
+</style>
+
+{% endblock %}
